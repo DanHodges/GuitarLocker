@@ -9,20 +9,21 @@ using System.Net;
 using GuitarLocker.Services;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Authorization;
+using Wildermuth.ViewModels;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace GuitarLocker.Controllers.API
 {
     [Authorize]
-    [Route("api/Instruments/{InstrumentName}/SoundClips")]
-    public class SoundClipController : Controller
+    [Route("api/Instruments/{InstrumentName}/Images")]
+    public class ImageController : Controller
     {
         private IGuitarLockerRepository _repository;
-        private ILogger<SoundClipController> _logger;
+        private ILogger<ImageController> _logger;
         private CoordService _coordService;
 
-        public SoundClipController(IGuitarLockerRepository repository, ILogger<SoundClipController> logger, CoordService coordService )
+        public ImageController(IGuitarLockerRepository repository, ILogger<ImageController> logger, CoordService coordService)
         {
             _repository = repository;
             _logger = logger;
@@ -39,7 +40,7 @@ namespace GuitarLocker.Controllers.API
                 {
                     return Json(null);
                 }
-                return Json(Mapper.Map<IEnumerable<SoundClipViewModel>>(results.SoundClips));
+                return Json(Mapper.Map<IEnumerable<ImageViewModel>>(results.Images));
 
             }
             catch (Exception ex)
@@ -50,16 +51,16 @@ namespace GuitarLocker.Controllers.API
             }
         }
 
-        //public async Task<JsonResult> Post(string InstrumentName, [FromBody]SoundClipViewModel vm)
+        //public async Task<JsonResult> Post(string InstrumentName, [FromBody]ImageViewModel vm)
         //{
         //    try
         //    {
         //        if (ModelState.IsValid)
         //        {
         //            // Map to Entity
-        //            var newSoundClip = Mapper.Map<SoundClip>(vm);
+        //            var newImage = Mapper.Map<Image>(vm);
         //            // Look up GeoCordinates
-        //            var coordResult = await _coordService.Lookup(newSoundClip.Name);
+        //            var coordResult = await _coordService.Lookup(newImage.Name);
 
         //            if (!coordResult.Success)
         //            {
@@ -67,15 +68,15 @@ namespace GuitarLocker.Controllers.API
         //                Json(coordResult.Message);
         //            }
 
-        //            newSoundClip.Longitude = coordResult.Longitude;
-        //            newSoundClip.Latitude = coordResult.Latitude;
+        //            newImage.Longitude = coordResult.Longitude;
+        //            newImage.Latitude = coordResult.Latitude;
         //            //Save to the Database
-        //            _repository.AddSoundClip(InstrumentName, newSoundClip, User.Identity.Name);
+        //            _repository.AddImage(InstrumentName, newImage, User.Identity.Name);
 
         //            if (_repository.SaveAll())
         //            {
         //                Response.StatusCode = (int)HttpStatusCode.Created;
-        //                return Json(Mapper.Map<SoundClipViewModel>(newSoundClip));
+        //                return Json(Mapper.Map<ImageViewModel>(newImage));
         //            }
         //        }
         //    }
@@ -83,10 +84,10 @@ namespace GuitarLocker.Controllers.API
         //    {
         //        _logger.LogError($"Failed to get {InstrumentName}", ex.Message);
         //        Response.StatusCode = (int)HttpStatusCode.BadRequest;
-        //        return Json("Failed to save new SoundClip");
+        //        return Json("Failed to save new Image");
         //    }
         //    Response.StatusCode = (int)HttpStatusCode.BadRequest;
-        //    return Json("Validation failed on new SoundClip");
+        //    return Json("Validation failed on new Image");
         //}
     }
 }

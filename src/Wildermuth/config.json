@@ -1,9 +1,0 @@
-﻿{
-  "AppSettings": {
-    "SiteEmailAddress": "me@web.com",
-    "BingKey": "Do not hardcode"
-  },
-  "Data": {
-    "GuitarLockerContextConnection": "Server=(localdb)\\ProjectsV12;Database=GuitarLockerDB;Trusted_Connection=true;MultipleActiveResultSets=true"
-  }
-}

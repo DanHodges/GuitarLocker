@@ -1,8 +1,8 @@
 ﻿//! travelmap.js
 //! version : 1.0.2
-//! authors : Shawn Wildermuth
+//! authors : Shawn GuitarLocker
 //! license : MIT
-//! repo    : https://github.com/shawnwildermuth/travelmap
+//! repo    : https://github.com/shawnGuitarLocker/travelmap
 
 // Build support for AMD or simple global (borrowed pattern from moment.js)
 (function () {
@@ -13,8 +13,8 @@
   var _travelMap = {};
 
   var _defaultOptions = {
-    stops: [],        // Array of the stops to show (required)
-    currentStop: 0,   // Ordinal Position of current location
+    SoundClips: [],        // Array of the SoundClips to show (required)
+    currentSoundClip: 0,   // Ordinal Position of current location
     selector: "#map", // CSS Selector for container for the map
     icon: {           // Icon details
       url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAIAAABvrngfAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjExR/NCNwAAAA1JREFUGFdjoDNgYAAAAHIAAejt7scAAAAASUVORK5CYII=",
@@ -22,12 +22,12 @@
       height: 3,
     },
     initialZoom: 4,   // Initial Level of Zoom for the Google Map
-    pastStroke: {     // Settings for the lines before the currentStop
+    pastStroke: {     // Settings for the lines before the currentSoundClip
       color: '#190300', 
       opacity: 0.5,
       weight: 2
     },
-    futureStroke: {   // Settings for hte lines after the currentStop
+    futureStroke: {   // Settings for hte lines after the currentSoundClip
       color: '#D30000',
       opacity: 0.6,
       weight: 2
@@ -49,14 +49,14 @@
     var map;
     var settings = _extend(options, _defaultOptions);
 
-    if (!settings.stops || settings.stops.length == 0) {
-      throw "You must supply stops when creating a map.";
+    if (!settings.SoundClips || settings.SoundClips.length == 0) {
+      throw "You must supply SoundClips when creating a map.";
     }
 
-    // calculate past, future and current stops
-    var pastLines = settings.stops.slice(0, settings.currentStop + 1);
-    var futureLines = settings.stops.slice(settings.currentStop, settings.stops.length);
-    var currentLocation = settings.stops[settings.currentStop];
+    // calculate past, future and current SoundClips
+    var pastLines = settings.SoundClips.slice(0, settings.currentSoundClip + 1);
+    var futureLines = settings.SoundClips.slice(settings.currentSoundClip, settings.SoundClips.length);
+    var currentLocation = settings.SoundClips[settings.currentSoundClip];
 
     _initStyle();
 
@@ -90,14 +90,14 @@
       strokeWeight: settings.futureStroke.weight
     });
 
-    for (var i = 0; i < settings.stops.length; ++i) {
-      var stop = settings.stops[i];
-      if (i != settings.currentStop) {
+    for (var i = 0; i < settings.SoundClips.length; ++i) {
+      var SoundClip = settings.SoundClips[i];
+      if (i != settings.currentSoundClip) {
         map.addMarker({
-          lat: stop.lat,
-          lng: stop.long,
+          lat: SoundClip.lat,
+          lng: SoundClip.long,
           icon: settings.icon.url,
-          infoWindow: { content: stop.info },
+          infoWindow: { content: SoundClip.info },
           anchorPoint: { x: settings.icon.width/2, y: settings.icon.height/2 }
         });
       }
@@ -119,14 +119,14 @@
     };
   };
 
-  var _toLatLong = function (stop) {
-    return [ stop.lat, stop.long ];
+  var _toLatLong = function (SoundClip) {
+    return [ SoundClip.lat, SoundClip.long ];
   };
 
-  var _toLatLongCollection = function (stops) {
+  var _toLatLongCollection = function (SoundClips) {
     var collection = [];
-    for (var x = 0; x < stops.length; ++x) {
-      collection.push(_toLatLong(stops[x]));
+    for (var x = 0; x < SoundClips.length; ++x) {
+      collection.push(_toLatLong(SoundClips[x]));
     }
     
     return collection;
@@ -134,7 +134,7 @@
 
   var _initStyle = function () {
 
-    var stopStyle = ".stopName { background: none repeat scroll 0 0 #222; width: 4px; height: 4px; }" +
+    var SoundClipStyle = ".SoundClipName { background: none repeat scroll 0 0 #222; width: 4px; height: 4px; }" +
       ".gm-style-iw{ overflow: hidden !important; }";
       
     var overlayStyle = " .travelmap-overlay{" +
@@ -175,7 +175,7 @@
 "}";
 
     var style = document.createElement("style");
-    style.innerHTML = stopStyle + overlayStyle;
+    style.innerHTML = SoundClipStyle + overlayStyle;
     document.head.appendChild(style);
   };
 

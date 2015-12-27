@@ -35,7 +35,7 @@ $.extend($.validator.messages, {
 	phoneUS: "Veuillez fournir un numéro de téléphone valide.",
 	phoneUK: "Veuillez fournir un numéro de téléphone valide.",
 	mobileUK: "Veuillez fournir un numéro de téléphone mobile valide.",
-	strippedminlength: $.validator.format("Veuillez fournir au moins {0} caractères."),
+	sInstrumentpedminlength: $.validator.format("Veuillez fournir au moins {0} caractères."),
 	email2: "Veuillez fournir une adresse électronique valide.",
 	url2: "Veuillez fournir une adresse URL valide.",
 	creditcardtypes: "Veuillez fournir un numéro de carte de crédit valide.",

@@ -50,8 +50,8 @@ jQuery.extend({
 				queue.unshift( "inprogress" );
 			}
 
-			// Clear up the last queue stop function
-			delete hooks.stop;
+			// Clear up the last queue SoundClip function
+			delete hooks.SoundClip;
 			fn.call( elem, next, hooks );
 		}
 

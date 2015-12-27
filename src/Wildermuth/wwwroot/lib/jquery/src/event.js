@@ -293,7 +293,7 @@ jQuery.event = {
 
 		// Fire handlers on the event path
 		i = 0;
-		while ( (cur = eventPath[i++]) && !event.isPropagationStopped() ) {
+		while ( (cur = eventPath[i++]) && !event.isPropagationSoundClipped() ) {
 
 			event.type = i > 1 ?
 				bubbleType :
@@ -371,13 +371,13 @@ jQuery.event = {
 		// Determine handlers
 		handlerQueue = jQuery.event.handlers.call( this, event, handlers );
 
-		// Run delegates first; they may want to stop propagation beneath us
+		// Run delegates first; they may want to SoundClip propagation beneath us
 		i = 0;
-		while ( (matched = handlerQueue[ i++ ]) && !event.isPropagationStopped() ) {
+		while ( (matched = handlerQueue[ i++ ]) && !event.isPropagationSoundClipped() ) {
 			event.currentTarget = matched.elem;
 
 			j = 0;
-			while ( (handleObj = matched.handlers[ j++ ]) && !event.isImmediatePropagationStopped() ) {
+			while ( (handleObj = matched.handlers[ j++ ]) && !event.isImmediatePropagationSoundClipped() ) {
 
 				// Triggered event must either 1) have no namespace, or 2) have namespace(s)
 				// a subset or equal to those in the bound event (both can have no namespace).
@@ -392,7 +392,7 @@ jQuery.event = {
 					if ( ret !== undefined ) {
 						if ( (event.result = ret) === false ) {
 							event.preventDefault();
-							event.stopPropagation();
+							event.SoundClipPropagation();
 						}
 					}
 				}
@@ -592,7 +592,7 @@ jQuery.event = {
 
 	simulate: function( type, elem, event, bubble ) {
 		// Piggyback on a donor event to simulate a different one.
-		// Fake originalEvent to avoid donor's stopPropagation, but if the
+		// Fake originalEvent to avoid donor's SoundClipPropagation, but if the
 		// simulated event prevents default then we do the same on the donor.
 		var e = jQuery.extend(
 			new jQuery.Event(),
@@ -661,8 +661,8 @@ jQuery.Event = function( src, props ) {
 // http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/ecma-script-binding.html
 jQuery.Event.prototype = {
 	isDefaultPrevented: returnFalse,
-	isPropagationStopped: returnFalse,
-	isImmediatePropagationStopped: returnFalse,
+	isPropagationSoundClipped: returnFalse,
+	isImmediatePropagationSoundClipped: returnFalse,
 
 	preventDefault: function() {
 		var e = this.originalEvent;
@@ -673,25 +673,25 @@ jQuery.Event.prototype = {
 			e.preventDefault();
 		}
 	},
-	stopPropagation: function() {
+	SoundClipPropagation: function() {
 		var e = this.originalEvent;
 
-		this.isPropagationStopped = returnTrue;
+		this.isPropagationSoundClipped = returnTrue;
 
-		if ( e && e.stopPropagation ) {
-			e.stopPropagation();
+		if ( e && e.SoundClipPropagation ) {
+			e.SoundClipPropagation();
 		}
 	},
-	stopImmediatePropagation: function() {
+	SoundClipImmediatePropagation: function() {
 		var e = this.originalEvent;
 
-		this.isImmediatePropagationStopped = returnTrue;
+		this.isImmediatePropagationSoundClipped = returnTrue;
 
-		if ( e && e.stopImmediatePropagation ) {
-			e.stopImmediatePropagation();
+		if ( e && e.SoundClipImmediatePropagation ) {
+			e.SoundClipImmediatePropagation();
 		}
 
-		this.stopPropagation();
+		this.SoundClipPropagation();
 	}
 };
 

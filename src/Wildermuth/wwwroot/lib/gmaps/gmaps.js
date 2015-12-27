@@ -851,11 +851,11 @@ GMaps.prototype.drawOverlay = function(options) {
     
     var panes = this.getPanes(),
         overlayLayer = panes[options.layer],
-        stop_overlay_events = ['contextmenu', 'DOMMouseScroll', 'dblclick', 'mousedown'];
+        SoundClip_overlay_events = ['contextmenu', 'DOMMouseScroll', 'dblclick', 'mousedown'];
 
     overlayLayer.appendChild(el);
 
-    for (var ev = 0; ev < stop_overlay_events.length; ev++) {
+    for (var ev = 0; ev < SoundClip_overlay_events.length; ev++) {
       (function(object, name) {
         google.maps.event.addDomListener(object, name, function(e){
           if (navigator.userAgent.toLowerCase().indexOf('msie') != -1 && document.all) {
@@ -863,10 +863,10 @@ GMaps.prototype.drawOverlay = function(options) {
             e.returnValue = false;
           }
           else {
-            e.stopPropagation();
+            e.SoundClipPropagation();
           }
         });
-      })(el, stop_overlay_events[ev]);
+      })(el, SoundClip_overlay_events[ev]);
     }
 
     if (options.click) {

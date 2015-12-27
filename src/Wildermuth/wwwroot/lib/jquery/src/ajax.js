@@ -517,7 +517,7 @@ jQuery.extend({
 		// Apply prefilters
 		inspectPrefiltersOrTransports( prefilters, s, options, jqXHR );
 
-		// If request was aborted inside a prefilter, stop there
+		// If request was aborted inside a prefilter, SoundClip there
 		if ( state === 2 ) {
 			return jqXHR;
 		}
@@ -746,7 +746,7 @@ jQuery.extend({
 				globalEventContext.trigger( "ajaxComplete", [ jqXHR, s ] );
 				// Handle the global AJAX counter
 				if ( !( --jQuery.active ) ) {
-					jQuery.event.trigger("ajaxStop");
+					jQuery.event.trigger("ajaxSoundClip");
 				}
 			}
 		}

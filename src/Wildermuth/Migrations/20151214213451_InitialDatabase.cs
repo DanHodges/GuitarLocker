@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using Microsoft.Data.Entity.Migrations;
 using Microsoft.Data.Entity.Metadata;
 
-namespace Wildermuth.Migrations
+namespace GuitarLocker.Migrations
 {
     public partial class InitialDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Trip",
+                name: "Instrument",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -21,10 +21,10 @@ namespace Wildermuth.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Trip", x => x.Id);
+                    table.PrimaryKey("PK_Instrument", x => x.Id);
                 });
             migrationBuilder.CreateTable(
-                name: "Stop",
+                name: "SoundClip",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -34,15 +34,15 @@ namespace Wildermuth.Migrations
                     Longitude = table.Column<double>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Order = table.Column<int>(nullable: false),
-                    TripId = table.Column<int>(nullable: true)
+                    InstrumentId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Stop", x => x.Id);
+                    table.PrimaryKey("PK_SoundClip", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Stop_Trip_TripId",
-                        column: x => x.TripId,
-                        principalTable: "Trip",
+                        name: "FK_SoundClip_Instrument_InstrumentId",
+                        column: x => x.InstrumentId,
+                        principalTable: "Instrument",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -50,8 +50,8 @@ namespace Wildermuth.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable("Stop");
-            migrationBuilder.DropTable("Trip");
+            migrationBuilder.DropTable("SoundClip");
+            migrationBuilder.DropTable("Instrument");
         }
     }
 }

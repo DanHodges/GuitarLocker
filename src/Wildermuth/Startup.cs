@@ -11,15 +11,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using Newtonsoft.Json.Serialization;
-using Wildermuth.Services;
-using Wildermuth.Models;
-using Wildermuth.ViewModels;
+using GuitarLocker.Services;
+using GuitarLocker.Models;
+using GuitarLocker.ViewModels;
 using AutoMapper;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Authentication.Cookies;
 using Microsoft.AspNet.Mvc;
 
-namespace Wildermuth
+namespace GuitarLocker
 {
     public class Startup
     {
@@ -48,7 +48,7 @@ namespace Wildermuth
                 opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             });
 
-            services.AddIdentity<WorldUser, IdentityRole>(config =>
+            services.AddIdentity<GuitarLockerUser, IdentityRole>(config =>
             {
                 config.User.RequireUniqueEmail = true;
                 config.Password.RequiredLength = 8;
@@ -70,17 +70,17 @@ namespace Wildermuth
                     }
                 };
             })
-            .AddEntityFrameworkStores<WorldContext>();
+            .AddEntityFrameworkStores<GuitarLockerContext>();
 
             services.AddEntityFramework()
                 .AddSqlServer()
-                .AddDbContext<WorldContext>();
-            services.AddTransient<WorldContextSeedData>();
+                .AddDbContext<GuitarLockerContext>();
+            services.AddTransient<GuitarLockerContextSeedData>();
 
             services.AddLogging();
 
             services.AddScoped<CoordService>();
-            services.AddScoped<IWorldRepository, WorldRepository>();
+            services.AddScoped<IGuitarLockerRepository, GuitarLockerRepository>();
 
         #if DEBUG
             services.AddScoped<IMailService, DebugMailService>();
@@ -90,7 +90,7 @@ namespace Wildermuth
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure(IApplicationBuilder app, WorldContextSeedData seeder, ILoggerFactory loggerFactory)
+        public async void Configure(IApplicationBuilder app, GuitarLockerContextSeedData seeder, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddDebug(LogLevel.Warning);
 
@@ -100,8 +100,8 @@ namespace Wildermuth
 
             Mapper.Initialize(config =>
             {
-                config.CreateMap<Trip, TripViewModel>().ReverseMap();
-                config.CreateMap<Stop, StopViewModel>().ReverseMap();
+                config.CreateMap<Instrument, InstrumentViewModel>().ReverseMap();
+                config.CreateMap<SoundClip, SoundClipViewModel>().ReverseMap();
             });
 
             app.UseMvc(config =>

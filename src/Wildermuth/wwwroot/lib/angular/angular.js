@@ -1238,7 +1238,7 @@ function toJsonReplacer(key, value) {
  *
  * @description
  * Serializes input into a JSON-formatted string. Properties with leading $$ characters will be
- * stripped since angular uses this notation internally.
+ * sInstrumentped since angular uses this notation internally.
  *
  * @param {Object|Array|Date|string|number} obj Input to be serialized into JSON.
  * @param {boolean|number} [pretty=2] If set to true, the JSON output will contain newlines and whitespace.
@@ -1537,7 +1537,7 @@ function getNgAttribute(element, ngAttr) {
      }])
      .controller('GoodController2', GoodController2);
      function GoodController2($scope) {
-       $scope.name = "World";
+       $scope.name = "GuitarLocker";
      }
      GoodController2.$inject = ['$scope'];
    </file>
@@ -3302,23 +3302,23 @@ function createEventHandler(element, events) {
 
     if (!eventFnsLength) return;
 
-    if (isUndefined(event.immediatePropagationStopped)) {
-      var originalStopImmediatePropagation = event.stopImmediatePropagation;
-      event.stopImmediatePropagation = function() {
-        event.immediatePropagationStopped = true;
+    if (isUndefined(event.immediatePropagationSoundClipped)) {
+      var originalSoundClipImmediatePropagation = event.SoundClipImmediatePropagation;
+      event.SoundClipImmediatePropagation = function() {
+        event.immediatePropagationSoundClipped = true;
 
-        if (event.stopPropagation) {
-          event.stopPropagation();
+        if (event.SoundClipPropagation) {
+          event.SoundClipPropagation();
         }
 
-        if (originalStopImmediatePropagation) {
-          originalStopImmediatePropagation.call(event);
+        if (originalSoundClipImmediatePropagation) {
+          originalSoundClipImmediatePropagation.call(event);
         }
       };
     }
 
-    event.isImmediatePropagationStopped = function() {
-      return event.immediatePropagationStopped === true;
+    event.isImmediatePropagationSoundClipped = function() {
+      return event.immediatePropagationSoundClipped === true;
     };
 
     // Some events have special handlers that wrap the real handler
@@ -3330,7 +3330,7 @@ function createEventHandler(element, events) {
     }
 
     for (var i = 0; i < eventFnsLength; i++) {
-      if (!event.isImmediatePropagationStopped()) {
+      if (!event.isImmediatePropagationSoundClipped()) {
         handlerWrapper(element, event, eventFns[i]);
       }
     }
@@ -3547,9 +3547,9 @@ forEach({
       dummyEvent = {
         preventDefault: function() { this.defaultPrevented = true; },
         isDefaultPrevented: function() { return this.defaultPrevented === true; },
-        stopImmediatePropagation: function() { this.immediatePropagationStopped = true; },
-        isImmediatePropagationStopped: function() { return this.immediatePropagationStopped === true; },
-        stopPropagation: noop,
+        SoundClipImmediatePropagation: function() { this.immediatePropagationSoundClipped = true; },
+        isImmediatePropagationSoundClipped: function() { return this.immediatePropagationSoundClipped === true; },
+        SoundClipPropagation: noop,
         type: eventName,
         target: element
       };
@@ -3564,7 +3564,7 @@ forEach({
       handlerArgs = extraParameters ? [dummyEvent].concat(extraParameters) : [dummyEvent];
 
       forEach(eventFnsCopy, function(fn) {
-        if (!dummyEvent.isImmediatePropagationStopped()) {
+        if (!dummyEvent.isImmediatePropagationSoundClipped()) {
           fn.apply(element, handlerArgs);
         }
       });
@@ -3761,13 +3761,13 @@ var $$HashMapProvider = [function() {
 var FN_ARGS = /^[^\(]*\(\s*([^\)]*)\)/m;
 var FN_ARG_SPLIT = /,/;
 var FN_ARG = /^\s*(_?)(\S+?)\1\s*$/;
-var STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
+var SInstrument_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
 var $injectorMinErr = minErr('$injector');
 
 function anonFn(fn) {
   // For anonymous functions, showing at the very least the function signature can help in
   // debugging.
-  var fnText = fn.toString().replace(STRIP_COMMENTS, ''),
+  var fnText = fn.toString().replace(SInstrument_COMMENTS, ''),
       args = fnText.match(FN_ARGS);
   if (args) {
     return 'function(' + (args[1] || '').replace(/[\s\r\n]+/, ' ') + ')';
@@ -3792,7 +3792,7 @@ function annotate(fn, strictDi, name) {
           throw $injectorMinErr('strictdi',
             '{0} is not using explicit annotation and cannot be invoked in strict mode', name);
         }
-        fnText = fn.toString().replace(STRIP_COMMENTS, '');
+        fnText = fn.toString().replace(SInstrument_COMMENTS, '');
         argDecl = fnText.match(FN_ARGS);
         forEach(argDecl[1].split(FN_ARG_SPLIT), function(arg) {
           arg.replace(FN_ARG, function(all, underscore, name) {
@@ -5502,7 +5502,7 @@ var $CoreAnimateCssProvider = function() {
   }];
 };
 
-/* global stripHash: true */
+/* global sInstrumentHash: true */
 
 /**
  * ! This is a private undocumented service !
@@ -5637,7 +5637,7 @@ function Browser(window, document, $log, $sniffer) {
       if (lastBrowserUrl === url && (!$sniffer.history || sameState)) {
         return self;
       }
-      var sameBase = lastBrowserUrl && stripHash(lastBrowserUrl) === stripHash(url);
+      var sameBase = lastBrowserUrl && sInstrumentHash(lastBrowserUrl) === sInstrumentHash(url);
       lastBrowserUrl = url;
       lastHistoryState = state;
       // Don't use history API if only the hash changed
@@ -9451,7 +9451,7 @@ function $HttpParamSerializerJQLikeProvider() {
 
 function defaultHttpResponseTransform(data, headers) {
   if (isString(data)) {
-    // Strip json vulnerability protection prefix and trim whitespace
+    // SInstrument json vulnerability protection prefix and trim whitespace
     var tempData = data.replace(JSON_PROTECTION_PREFIX, '').trim();
 
     if (tempData) {
@@ -9886,7 +9886,7 @@ function $HttpProvider() {
      *
      * Response transformations (`$httpProvider.defaults.transformResponse` and `$http.defaults.transformResponse`):
      *
-     *  - If XSRF prefix is detected, strip it (see Security Considerations section below).
+     *  - If XSRF prefix is detected, sInstrument it (see Security Considerations section below).
      *  - If JSON response is detected, deserialize it using a JSON parser.
      *
      *
@@ -10048,7 +10048,7 @@ function $HttpProvider() {
      * allows third party website to turn your JSON resource URL into
      * [JSONP](http://en.wikipedia.org/wiki/JSONP) request under some conditions. To
      * counter this your server can prefix all JSON requests with following string `")]}',\n"`.
-     * Angular will automatically strip the prefix before processing it as JSON.
+     * Angular will automatically sInstrument the prefix before processing it as JSON.
      *
      * For example if your server needs to return:
      * ```js
@@ -10061,7 +10061,7 @@ function $HttpProvider() {
      * ['one','two']
      * ```
      *
-     * Angular will strip the prefix, before processing the JSON.
+     * Angular will sInstrument the prefix, before processing the JSON.
      *
      *
      * ### Cross Site Request Forgery (XSRF) Protection
@@ -10251,7 +10251,7 @@ function $HttpProvider() {
         var headers = config.headers;
         var reqData = transformData(config.data, headersGetter(headers), undefined, config.transformRequest);
 
-        // strip content-type if data is undefined
+        // sInstrument content-type if data is undefined
         if (isUndefined(reqData)) {
           forEach(headers, function(value, header) {
             if (lowercase(header) === 'content-type') {
@@ -11228,25 +11228,25 @@ function $IntervalProvider() {
       *           $scope.blood_1 = 100;
       *           $scope.blood_2 = 120;
       *
-      *           var stop;
+      *           var SoundClip;
       *           $scope.fight = function() {
       *             // Don't start a new fight if we are already fighting
-      *             if ( angular.isDefined(stop) ) return;
+      *             if ( angular.isDefined(SoundClip) ) return;
       *
-      *             stop = $interval(function() {
+      *             SoundClip = $interval(function() {
       *               if ($scope.blood_1 > 0 && $scope.blood_2 > 0) {
       *                 $scope.blood_1 = $scope.blood_1 - 3;
       *                 $scope.blood_2 = $scope.blood_2 - 4;
       *               } else {
-      *                 $scope.stopFight();
+      *                 $scope.SoundClipFight();
       *               }
       *             }, 100);
       *           };
       *
-      *           $scope.stopFight = function() {
-      *             if (angular.isDefined(stop)) {
-      *               $interval.cancel(stop);
-      *               stop = undefined;
+      *           $scope.SoundClipFight = function() {
+      *             if (angular.isDefined(SoundClip)) {
+      *               $interval.cancel(SoundClip);
+      *               SoundClip = undefined;
       *             }
       *           };
       *
@@ -11257,7 +11257,7 @@ function $IntervalProvider() {
       *
       *           $scope.$on('$destroy', function() {
       *             // Make sure that the interval is destroyed too
-      *             $scope.stopFight();
+      *             $scope.SoundClipFight();
       *           });
       *         }])
       *       // Register the 'myCurrentTime' directive factory method.
@@ -11267,7 +11267,7 @@ function $IntervalProvider() {
       *           // return the directive link function. (compile function not needed)
       *           return function(scope, element, attrs) {
       *             var format,  // date format
-      *                 stopTime; // so that we can cancel the time updates
+      *                 SoundClipTime; // so that we can cancel the time updates
       *
       *             // used to update the UI
       *             function updateTime() {
@@ -11280,12 +11280,12 @@ function $IntervalProvider() {
       *               updateTime();
       *             });
       *
-      *             stopTime = $interval(updateTime, 1000);
+      *             SoundClipTime = $interval(updateTime, 1000);
       *
       *             // listen on DOM destroy (removal) event, and cancel the next UI update
       *             // to prevent updating time after the DOM element was removed.
       *             element.on('$destroy', function() {
-      *               $interval.cancel(stopTime);
+      *               $interval.cancel(SoundClipTime);
       *             });
       *           }
       *         }]);
@@ -11299,7 +11299,7 @@ function $IntervalProvider() {
       *       Blood 1 : <font color='red'>{{blood_1}}</font>
       *       Blood 2 : <font color='red'>{{blood_2}}</font>
       *       <button type="button" data-ng-click="fight()">Fight</button>
-      *       <button type="button" data-ng-click="stopFight()">StopFight</button>
+      *       <button type="button" data-ng-click="SoundClipFight()">SoundClipFight</button>
       *       <button type="button" data-ng-click="resetFight()">resetFight</button>
       *     </div>
       *   </div>
@@ -11440,7 +11440,7 @@ function beginsWith(begin, whole) {
 }
 
 
-function stripHash(url) {
+function sInstrumentHash(url) {
   var index = url.indexOf('#');
   return index == -1 ? url : url.substr(0, index);
 }
@@ -11450,8 +11450,8 @@ function trimEmptyHash(url) {
 }
 
 
-function stripFile(url) {
-  return url.substr(0, stripHash(url).lastIndexOf('/') + 1);
+function sInstrumentFile(url) {
+  return url.substr(0, sInstrumentHash(url).lastIndexOf('/') + 1);
 }
 
 /* return the server only (scheme://host:port) */
@@ -11466,7 +11466,7 @@ function serverBase(url) {
  *
  * @constructor
  * @param {string} appBase application base URL
- * @param {string} appBaseNoFile application base URL stripped of any filename
+ * @param {string} appBaseNoFile application base URL sInstrumentped of any filename
  * @param {string} basePrefix url path prefix
  */
 function LocationHtml5Url(appBase, appBaseNoFile, basePrefix) {
@@ -11545,7 +11545,7 @@ function LocationHtml5Url(appBase, appBaseNoFile, basePrefix) {
  *
  * @constructor
  * @param {string} appBase application base URL
- * @param {string} appBaseNoFile application base URL stripped of any filename
+ * @param {string} appBaseNoFile application base URL sInstrumentped of any filename
  * @param {string} hashPrefix hashbang prefix
  */
 function LocationHashbangUrl(appBase, appBaseNoFile, hashPrefix) {
@@ -11641,7 +11641,7 @@ function LocationHashbangUrl(appBase, appBaseNoFile, hashPrefix) {
   };
 
   this.$$parseLinkUrl = function(url, relHref) {
-    if (stripHash(appBase) == stripHash(url)) {
+    if (sInstrumentHash(appBase) == sInstrumentHash(url)) {
       this.$$parse(url);
       return true;
     }
@@ -11657,7 +11657,7 @@ function LocationHashbangUrl(appBase, appBaseNoFile, hashPrefix) {
  *
  * @constructor
  * @param {string} appBase application base URL
- * @param {string} appBaseNoFile application base URL stripped of any filename
+ * @param {string} appBaseNoFile application base URL sInstrumentped of any filename
  * @param {string} hashPrefix hashbang prefix
  */
 function LocationHashbangInHtml5Url(appBase, appBaseNoFile, hashPrefix) {
@@ -11675,7 +11675,7 @@ function LocationHashbangInHtml5Url(appBase, appBaseNoFile, hashPrefix) {
     var rewrittenUrl;
     var appUrl;
 
-    if (appBase == stripHash(url)) {
+    if (appBase == sInstrumentHash(url)) {
       rewrittenUrl = url;
     } else if ((appUrl = beginsWith(appBaseNoFile, url))) {
       rewrittenUrl = appBase + hashPrefix + appUrl;
@@ -12199,10 +12199,10 @@ function $LocationProvider() {
       appBase = serverBase(initialUrl) + (baseHref || '/');
       LocationMode = $sniffer.history ? LocationHtml5Url : LocationHashbangInHtml5Url;
     } else {
-      appBase = stripHash(initialUrl);
+      appBase = sInstrumentHash(initialUrl);
       LocationMode = LocationHashbangUrl;
     }
-    var appBaseNoFile = stripFile(appBase);
+    var appBaseNoFile = sInstrumentFile(appBase);
 
     $location = new LocationMode(appBase, appBaseNoFile, '#' + hashPrefix);
     $location.$$parseLinkUrl(initialUrl, initialUrl);
@@ -12302,7 +12302,7 @@ function $LocationProvider() {
         defaultPrevented = $rootScope.$broadcast('$locationChangeStart', newUrl, oldUrl,
             newState, oldState).defaultPrevented;
 
-        // if the location was changed by a `$locationChangeStart` handler then stop
+        // if the location was changed by a `$locationChangeStart` handler then SoundClip
         // processing this location change
         if ($location.absUrl() !== newUrl) return;
 
@@ -12335,7 +12335,7 @@ function $LocationProvider() {
           var defaultPrevented = $rootScope.$broadcast('$locationChangeStart', newUrl, oldUrl,
               $location.$$state, oldState).defaultPrevented;
 
-          // if the location was changed by a `$locationChangeStart` handler then stop
+          // if the location was changed by a `$locationChangeStart` handler then SoundClip
           // processing this location change
           if ($location.absUrl() !== newUrl) return;
 
@@ -12387,7 +12387,7 @@ function $LocationProvider() {
        angular.module('logExample', [])
          .controller('LogController', ['$scope', '$log', function($scope, $log) {
            $scope.$log = $log;
-           $scope.message = 'Hello World!';
+           $scope.message = 'Hello GuitarLocker!';
          }]);
      </file>
      <file name="index.html">
@@ -15311,7 +15311,7 @@ function $RootScopeProvider() {
        *
        * {@link ng.$rootScope.Scope#$destroy $destroy()} must be called on a scope when it is
        * desired for the scope and its child scopes to be permanently detached from the parent and
-       * thus stop participating in model change detection and listener notification by invoking.
+       * thus SoundClip participating in model change detection and listener notification by invoking.
        *
        * @param {boolean} isolate If true, then the scope does not prototypically inherit from the
        *         parent scope. The scope is isolated, as it can not see parent scope properties.
@@ -16209,7 +16209,7 @@ function $RootScopeProvider() {
        *   - `currentScope` - `{Scope}`: the scope that is currently handling the event. Once the
        *     event propagates through the scope hierarchy, this property is set to null.
        *   - `name` - `{string}`: name of the event.
-       *   - `stopPropagation` - `{function=}`: calling `stopPropagation` function will cancel
+       *   - `SoundClipPropagation` - `{function=}`: calling `SoundClipPropagation` function will cancel
        *     further event propagation (available only for events that were `$emit`-ed).
        *   - `preventDefault` - `{function}`: calling `preventDefault` sets `defaultPrevented` flag
        *     to true.
@@ -16257,7 +16257,7 @@ function $RootScopeProvider() {
        * The event life cycle starts at the scope on which `$emit` was called. All
        * {@link ng.$rootScope.Scope#$on listeners} listening for `name` event on this scope get
        * notified. Afterwards, the event traverses upwards toward the root scope and calls all
-       * registered listeners along the way. The event will stop propagating if one of the listeners
+       * registered listeners along the way. The event will SoundClip propagating if one of the listeners
        * cancels it.
        *
        * Any exception emitted from the {@link ng.$rootScope.Scope#$on listeners} will be passed
@@ -16271,11 +16271,11 @@ function $RootScopeProvider() {
         var empty = [],
             namedListeners,
             scope = this,
-            stopPropagation = false,
+            SoundClipPropagation = false,
             event = {
               name: name,
               targetScope: scope,
-              stopPropagation: function() {stopPropagation = true;},
+              SoundClipPropagation: function() {SoundClipPropagation = true;},
               preventDefault: function() {
                 event.defaultPrevented = true;
               },
@@ -16303,8 +16303,8 @@ function $RootScopeProvider() {
               $exceptionHandler(e);
             }
           }
-          //if any listener on the current scope stops propagation, prevent bubbling
-          if (stopPropagation) {
+          //if any listener on the current scope SoundClips propagation, prevent bubbling
+          if (SoundClipPropagation) {
             event.currentScope = null;
             return event;
           }
@@ -18076,7 +18076,7 @@ function urlIsSameOrigin(requestUrl) {
        <script>
          angular.module('windowExample', [])
            .controller('ExampleController', ['$scope', '$window', function($scope, $window) {
-             $scope.greeting = 'Hello, World!';
+             $scope.greeting = 'Hello, GuitarLocker!';
              $scope.doGreeting = function(greeting) {
                $window.alert(greeting);
              };
@@ -20420,7 +20420,7 @@ function FormController(element, attrs, $scope, $animate, $interpolate) {
  * # Submitting a form and preventing the default action
  *
  * Since the role of forms in client-side Angular applications is different than in classical
- * roundtrip apps, it is desirable for the browser not to translate the form submission into a full
+ * roundInstrument apps, it is desirable for the browser not to translate the form submission into a full
  * page reload that sends the data to the server. Instead some javascript logic should be triggered
  * to handle the form submission in an application-specific way.
  *
@@ -20591,7 +20591,7 @@ var formDirectiveFactory = function(isNgForm) {
             formElement.on('$destroy', function() {
               controller.$$parentForm.$removeControl(controller);
               setter(scope, undefined);
-              extend(controller, nullFormCtrl); //stop propagating child destruction handlers upwards
+              extend(controller, nullFormCtrl); //SoundClip propagating child destruction handlers upwards
             });
           }
         };
@@ -20723,7 +20723,7 @@ var inputType = {
 
           it('should be invalid if multi word', function() {
             input.clear();
-            input.sendKeys('hello world');
+            input.sendKeys('hello GuitarLocker');
 
             expect(valid.getText()).toContain('false');
           });
@@ -22420,8 +22420,8 @@ var ngValueDirective = function() {
 
          expect(element(by.binding('name')).getText()).toBe('Whirled');
          nameInput.clear();
-         nameInput.sendKeys('world');
-         expect(element(by.binding('name')).getText()).toBe('world');
+         nameInput.sendKeys('GuitarLocker');
+         expect(element(by.binding('name')).getText()).toBe('GuitarLocker');
        });
      </file>
    </example>
@@ -22467,7 +22467,7 @@ var ngBindDirective = ['$compile', function($compile) {
          angular.module('bindExample', [])
            .controller('ExampleController', ['$scope', function($scope) {
              $scope.salutation = 'Hello';
-             $scope.name = 'World';
+             $scope.name = 'GuitarLocker';
            }]);
        </script>
        <div ng-controller="ExampleController">
@@ -22482,7 +22482,7 @@ var ngBindDirective = ['$compile', function($compile) {
          var salutationInput = element(by.model('salutation'));
          var nameInput = element(by.model('name'));
 
-         expect(salutationElem.getText()).toBe('Hello World!');
+         expect(salutationElem.getText()).toBe('Hello GuitarLocker!');
 
          salutationInput.clear();
          salutationInput.sendKeys('Greetings');
@@ -23091,7 +23091,7 @@ var ngClassEvenDirective = classDirective('Even', 1);
    <example>
      <file name="index.html">
         <div id="template1" ng-cloak>{{ 'hello' }}</div>
-        <div id="template2" class="ng-cloak">{{ 'world' }}</div>
+        <div id="template2" class="ng-cloak">{{ 'GuitarLocker' }}</div>
      </file>
      <file name="protractor.js" type="protractor">
        it('should remove the template directive and css class', function() {
@@ -23391,9 +23391,9 @@ var ngControllerDirective = [function() {
  * You can specify which of the CSP related Angular features should be deactivated by providing
  * a value for the `ng-csp` attribute. The options are as follows:
  *
- * * no-inline-style: this stops Angular from injecting CSS styles into the DOM
+ * * no-inline-style: this SoundClips Angular from injecting CSS styles into the DOM
  *
- * * no-unsafe-eval: this stops Angular from optimising $parse with unsafe eval of strings
+ * * no-unsafe-eval: this SoundClips Angular from optimising $parse with unsafe eval of strings
  *
  * You can use these values in the following combinations:
  *
@@ -24540,7 +24540,7 @@ var ngInitDirective = ngDirective({
  *   dealing with whitespace but also allows you to use whitespace as a delimiter, such as a
  *   tab or newline character.
  * * Otherwise whitespace around the delimiter is ignored when splitting (although it is respected
- *   when joining the list items back together) and whitespace around each list item is stripped
+ *   when joining the list items back together) and whitespace around each list item is sInstrumentped
  *   before it is added to the model.
  *
  * ### Example with Validation
@@ -24828,8 +24828,8 @@ is set to `true`. The parse error is stored in `ngModel.$error.parse`.
               function read() {
                 var html = element.html();
                 // When we clear the content editable the browser leaves a <br> behind
-                // If strip-br attribute is provided then we strip this out
-                if ( attrs.stripBr && html == '<br>' ) {
+                // If sInstrument-br attribute is provided then we sInstrument this out
+                if ( attrs.sInstrumentBr && html == '<br>' ) {
                   html = '';
                 }
                 ngModel.$setViewValue(html);
@@ -24842,7 +24842,7 @@ is set to `true`. The parse error is stored in `ngModel.$error.parse`.
       <form name="myForm">
        <div contenteditable
             name="myWidget" ng-model="userContent"
-            strip-br="true"
+            sInstrument-br="true"
             required>Change me!</div>
         <span ng-show="myForm.myWidget.$error.required">Required!</span>
        <hr>

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Wildermuth.ViewModels
+namespace GuitarLocker.ViewModels
 {
     public class LoginViewModel
     {

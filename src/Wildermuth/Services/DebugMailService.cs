@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace Wildermuth.Services
+namespace GuitarLocker.Services
 {
     public class DebugMailService : IMailService
     {

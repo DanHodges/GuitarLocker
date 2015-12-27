@@ -922,7 +922,7 @@ $.extend( $.validator, {
 			}
 		},
 
-		stopRequest: function( element, valid ) {
+		SoundClipRequest: function( element, valid ) {
 			this.pendingRequest--;
 			// sometimes synchronization fails, make sure pendingRequest is never < 0
 			if ( this.pendingRequest < 0 ) {
@@ -1352,7 +1352,7 @@ $.extend( $.validator, {
 						validator.showErrors( errors );
 					}
 					previous.valid = valid;
-					validator.stopRequest( element, valid );
+					validator.SoundClipRequest( element, valid );
 				}
 			}, param ) );
 			return "pending";

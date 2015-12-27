@@ -2,17 +2,17 @@
 
     "use strict";
 
-    angular.module("app-trips", ["simpleControls", "ngRoute"])
+    angular.module("app-Instruments", ["simpleControls", "ngRoute"])
         .config(function ($routeProvider) {
             $routeProvider.when("/", {
-                controller: "tripsController",
+                controller: "InstrumentsController",
                 controllerAs: "vm",
-                templateUrl: "/views/tripView.html"
+                templateUrl: "/views/InstrumentView.html"
             });
-            $routeProvider.when("/editor/:tripName", {
-                controller: "tripEditorController",
+            $routeProvider.when("/editor/:InstrumentName", {
+                controller: "InstrumentEditorController",
                 controllerAs: "vm",
-                templateUrl: "/views/tripEditorView.html"
+                templateUrl: "/views/InstrumentEditorView.html"
             });
             $routeProvider.otherwise({ redirectTo: "/" });
 

@@ -57,7 +57,7 @@ var i,
 	push_native = arr.push,
 	push = arr.push,
 	slice = arr.slice,
-	// Use a stripped-down indexOf as it's faster than native
+	// Use a sInstrumentped-down indexOf as it's faster than native
 	// http://jsperf.com/thor-indexof-vs-for/5
 	indexOf = function( list, elem ) {
 		var i = 0,
@@ -1051,7 +1051,7 @@ Expr = Sizzle.selectors = {
 			if ( match[3] ) {
 				match[2] = match[4] || match[5] || "";
 
-			// Strip excess characters from unquoted arguments
+			// SInstrument excess characters from unquoted arguments
 			} else if ( unquoted && rpseudo.test( unquoted ) &&
 				// Get excess from tokenize (recursively)
 				(excess = tokenize( unquoted, true )) &&

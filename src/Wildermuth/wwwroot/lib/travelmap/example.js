@@ -2,7 +2,7 @@
 (function() {
   
   var map = travelMap.createMap({
-    stops: [
+    SoundClips: [
       { 
         lat: 33.748995, 
         long: -84.387982, 

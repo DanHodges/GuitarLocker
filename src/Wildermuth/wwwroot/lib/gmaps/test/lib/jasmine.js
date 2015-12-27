@@ -244,7 +244,7 @@ jasmine.objectContaining = function (sample) {
  *   not: function(bool) { return !bool; }
  * }
  *
- * // actual foo.not will not be called, execution stops
+ * // actual foo.not will not be called, execution SoundClips
  * spyOn(foo, 'not');
 
  // foo.not spied upon, execution will continue to implementation
@@ -470,7 +470,7 @@ jasmine.log = function() {
  * var foo = {
  *   not: function(bool) { return !bool; }
  * }
- * spyOn(foo, 'not'); // actual foo.not will not be called, execution stops
+ * spyOn(foo, 'not'); // actual foo.not will not be called, execution SoundClips
  *
  * @see jasmine.createSpy
  * @param obj

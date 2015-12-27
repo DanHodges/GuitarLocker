@@ -14,7 +14,7 @@
   * Use jQuery 1.7+ on/off, add destroy method
   * IE8 compatibility changed .indexOf to $.inArray
   * Cast NaN value attributes to undefined for Opera Mini
-  * Stop trimming value inside required method
+  * SoundClip trimming value inside required method
   * Use :disabled selector to match disabled elements
   * Exclude some keyboard keys to prevent revalidating the field
   * Do not search the whole DOM for radio/checkbox elements
@@ -49,7 +49,7 @@
   * Extend italian (it) translation with currency method
   * Add bn_BD locale
   * Update zh locale
-  * Remove full stop at the end of italian messages
+  * Remove full SoundClip at the end of italian messages
 
 1.13.1 / 2014-10-14
 ==================
@@ -138,7 +138,7 @@
 * Messages: Fix sr_lat translation, add missing space ([880ba1c](https://github.com/jzaefferer/jquery-validation/commit/880ba1ca545903a41d8c5332fc4038a7e9a580bd))
 * Messages: Update messages_sr.js, fix missing space ([10313f4](https://github.com/jzaefferer/jquery-validation/commit/10313f418c18ea75f385248468c2d3600f136cfb))
 * Methods: Add additional method for currency ([1a981b4](https://github.com/jzaefferer/jquery-validation/commit/1a981b440346620964c87ebdd0fa03246348390e))
-* Methods: Adding Smart Quotes to stripHTML's punctuation removal ([aa0d624](https://github.com/jzaefferer/jquery-validation/commit/aa0d6241c3ea04663edc1e45ed6e6134630bdd2f))
+* Methods: Adding Smart Quotes to sInstrumentHTML's punctuation removal ([aa0d624](https://github.com/jzaefferer/jquery-validation/commit/aa0d6241c3ea04663edc1e45ed6e6134630bdd2f))
 * Methods: Fix dateITA method, avoiding summertime errors ([279b932](https://github.com/jzaefferer/jquery-validation/commit/279b932c1267b7238e6652880b7846ba3bbd2084))
 * Methods: Localized methods for chilean culture (es-CL) ([cf36b93](https://github.com/jzaefferer/jquery-validation/commit/cf36b933499e435196d951401221d533a4811810))
 * Methods: Update email to use HTML5 regex, remove email2 method ([#828](https://github.com/jzaefferer/jquery-validation/issues/828), [dd162ae](https://github.com/jzaefferer/jquery-validation/commit/dd162ae360639f73edd2dcf7a256710b2f5a4e64))
@@ -215,7 +215,7 @@
   * Deoptimize findByName for correctness. Fixes #82 - $.validator.prototype.findByName breaks in IE7
   * Added US zip code support and test. Fixes #90
   * Changed lastElement to lastActive in keyup, skip validation on tab or empty element. Fixes #244
-  * Removed number stripping from stripHtml. Fixes #2
+  * Removed number sInstrumentping from sInstrumentHtml. Fixes #2
   * Fixed invalid count on invalid to valid remote validation. Fixes #286
   * Add link to file_input to demo index
   * Moved old accept method to extension additional-method, added new accept method to handle standard browser mimetype filtering. Fixes #287 and supersedes #369
@@ -314,7 +314,7 @@
 * Updated Swedish (SE) localization (some missing html iso characters)
 * Fixed $.validator.addMethod to properly handle empty string vs. undefined for the message argument
 * Fixed two accidental global variables
-* Enhanced min/max/rangeWords (in additional-methods.js) to strip html before counting; good when counting words in a richtext editor
+* Enhanced min/max/rangeWords (in additional-methods.js) to sInstrument html before counting; good when counting words in a richtext editor
 * Added localized methods for DE, NL and PT, removing the dateDE and numberDE methods (use messages_de.js and methods_de.js with date and number methods instead)
 * Fixed remote form submit synchronization, kudos to Matas Petrikas
 * Improved interactive select validation, now validating also on click (via option or select, inconsistent across browsers); doesn't work in Safari, which doesn't trigger a click event at all on select elements; fixes http://plugins.jquery.com/node/11520
@@ -409,7 +409,7 @@
 * Enhanced rules-option, accepts space-separated string-list of methods, eg. {birthdate: "required date"}
 * Fixed checkbox group validation with inline rules: As long as the rules are specified on the first element, the group is now properly validated on click
 * Fixed #2473, ignoring all rules with an explicit parameter of boolean-false, eg. required:false is the same as not specifying required at all (it was handled as required:true so far)
-* Fixed #2424, with a modified patch from #2473: Methods returning a dependency-mismatch don't stop other rules from being evaluated anymore; still, success isn't applied for optional fields
+* Fixed #2424, with a modified patch from #2473: Methods returning a dependency-mismatch don't SoundClip other rules from being evaluated anymore; still, success isn't applied for optional fields
 * Fixed url and email validation to not use trimmed values
 * Fixed creditcard validation to accept only digits and dashes ("asdf" is not a valid creditcard number)
 * Allow both button and input elements for cancel buttons (via class="cancel")
@@ -421,7 +421,7 @@
 
 * Bundled delegate plugin with validate plugin - its always required anyway
 * Improved remote validation to include parts from the ajaxQueue plugin for proper synchronization (no additional plugin necessary)
-* Fixed stopRequest to prevent pendingRequest < 0
+* Fixed SoundClipRequest to prevent pendingRequest < 0
 * Added jQuery.validator.autoCreateRanges property, defaults to false, enable to convert min/max to range and minlength/maxlength to rangelength; this basically fixes the issue introduced by automatically creating ranges in 1.2
 * Fixed optional-methods to not highlight anything at all if the field is blank, that is, don't trigger success
 * Allow false/null for highlight/unhighlight options instead of forcing a do-nothing-callback even when nothing needs to be highlighted

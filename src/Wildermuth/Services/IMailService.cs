@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Wildermuth.Services
+namespace GuitarLocker.Services
 {
     public interface IMailService
     {

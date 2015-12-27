@@ -1,7 +1,7 @@
 {
   "name": "travelmap",
   "version": "1.0.2",
-  "description": "Extension to GMaps to create a map of a trip.",
+  "description": "Extension to GMaps to create a map of a Instrument.",
   "main": "travelmap.js",
   "directories": {
     "test": "tests"
@@ -11,17 +11,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/shawnwildermuth/travelmap"
+    "url": "https://github.com/shawnGuitarLocker/travelmap"
   },
   "keywords": [
     "Gmaps"
   ],
-  "author": "Shawn Wildermuth",
+  "author": "Shawn GuitarLocker",
   "maintainers": [
     {
-      "name": "Shawn Wildermuth",
-      "web": "http://wildermuth.com",
-      "twitter": "@shawnwildermuth"
+      "name": "Shawn GuitarLocker",
+      "web": "http://GuitarLocker.com",
+      "twitter": "@shawnGuitarLocker"
     }
   ],
   "licenses": [
@@ -31,10 +31,10 @@
     }
   ],
   "bugs": {
-    "url": "https://github.com/shawnwildermuth/travelmap/issues"
+    "url": "https://github.com/shawnGuitarLocker/travelmap/issues"
   },
   "readme": "readme.md",
-  "homepage": "https://github.com/shawnwildermuth/travelmap",
+  "homepage": "https://github.com/shawnGuitarLocker/travelmap",
   "devDependencies": {
     "gulp": "^3.8.11",
     "gulp-jshint": "^1.10.0",

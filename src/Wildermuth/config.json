@@ -4,6 +4,6 @@
     "BingKey": "Do not hardcode"
   },
   "Data": {
-    "WorldContextConnection": "Server=(localdb)\\ProjectsV12;Database=WildermuthDB;Trusted_Connection=true;MultipleActiveResultSets=true"
+    "GuitarLockerContextConnection": "Server=(localdb)\\ProjectsV12;Database=GuitarLockerDB;Trusted_Connection=true;MultipleActiveResultSets=true"
   }
 }

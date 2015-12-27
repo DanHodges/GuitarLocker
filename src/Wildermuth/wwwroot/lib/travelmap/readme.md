@@ -4,9 +4,9 @@ This project extends the GMaps project and allow a building of map that shows a 
 
 ## Overview
 
-I built this when I decided to travel around the world in a year. To create a map, you need GMaps and the Google Maps API. You can see it in action on my tour map:
+I built this when I decided to travel around the GuitarLocker in a year. To create a map, you need GMaps and the Google Maps API. You can see it in action on my tour map:
 
-> http://wilderworldtour.com
+> http://wilderGuitarLockertour.com
 
 ## Installation
 
@@ -30,12 +30,12 @@ Before you can use the library, you need to include the Google API and GMaps lib
 // Your Script Goes Here
 ```
 
-Once you have the scripts, it's usage is simply calling createMap and specifying the stops and selector:
+Once you have the scripts, it's usage is simply calling createMap and specifying the SoundClips and selector:
 
 ```
 // JavaScript
 var map = travelMap.createMap({
-  stops: [
+  SoundClips: [
     { 
       lat: 33.748995, 
       long: -84.387982, 
@@ -62,7 +62,7 @@ The map object that is returned from createMap contains three properties:
 
 * map: The underlying GMaps object
 * settings: The complete settings used to create the map. **(readonly)**
-* currentStop: An object that represents the current stop on the trip. **(readonly)**
+* currentSoundClip: An object that represents the current SoundClip on the Instrument. **(readonly)**
 
 ## options
 
@@ -70,8 +70,8 @@ When you call createMap, you can specify any of the following options (defaults 
 
 ```
 {
-  stops: [],        // Array of the stops to show (required)
-  currentStop: 0,   // Ordinal Position of current location
+  SoundClips: [],        // Array of the SoundClips to show (required)
+  currentSoundClip: 0,   // Ordinal Position of current location
   selector: "#map", // CSS Selector for container for the map
   icon: {           // Icon details
     url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAIAAABvrngfAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjExR/NCNwAAAA1JREFUGFdjoDNgYAAAAHIAAejt7scAAAAASUVORK5CYII=",
@@ -79,12 +79,12 @@ When you call createMap, you can specify any of the following options (defaults 
     height: 3,
   },
   initialZoom: 4,   // Initial Level of Zoom for the Google Map
-  pastStroke: {     // Settings for the lines before the currentStop
+  pastStroke: {     // Settings for the lines before the currentSoundClip
     color: '#190300', 
     opacity: 0.5,
     weight: 2
   },
-  futureStroke: {   // Settings for hte lines after the currentStop
+  futureStroke: {   // Settings for hte lines after the currentSoundClip
     color: '#D30000',
     opacity: 0.6,
     weight: 2

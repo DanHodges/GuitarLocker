@@ -3,11 +3,11 @@ using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Infrastructure;
 using Microsoft.Data.Entity.Metadata;
 using Microsoft.Data.Entity.Migrations;
-using Wildermuth.Models;
+using GuitarLocker.Models;
 
-namespace Wildermuth.Migrations
+namespace GuitarLocker.Migrations
 {
-    [DbContext(typeof(WorldContext))]
+    [DbContext(typeof(GuitarLockerContext))]
     [Migration("20151214213451_InitialDatabase")]
     partial class InitialDatabase
     {
@@ -17,7 +17,7 @@ namespace Wildermuth.Migrations
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Wildermuth.Models.Stop", b =>
+            modelBuilder.Entity("GuitarLocker.Models.SoundClip", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -32,12 +32,12 @@ namespace Wildermuth.Migrations
 
                     b.Property<int>("Order");
 
-                    b.Property<int?>("TripId");
+                    b.Property<int?>("InstrumentId");
 
                     b.HasKey("Id");
                 });
 
-            modelBuilder.Entity("Wildermuth.Models.Trip", b =>
+            modelBuilder.Entity("GuitarLocker.Models.Instrument", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -51,11 +51,11 @@ namespace Wildermuth.Migrations
                     b.HasKey("Id");
                 });
 
-            modelBuilder.Entity("Wildermuth.Models.Stop", b =>
+            modelBuilder.Entity("GuitarLocker.Models.SoundClip", b =>
                 {
-                    b.HasOne("Wildermuth.Models.Trip")
+                    b.HasOne("GuitarLocker.Models.Instrument")
                         .WithMany()
-                        .HasForeignKey("TripId");
+                        .HasForeignKey("InstrumentId");
                 });
         }
     }

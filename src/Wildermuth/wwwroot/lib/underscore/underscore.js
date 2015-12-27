@@ -675,14 +675,14 @@
   // Generate an integer Array containing an arithmetic progression. A port of
   // the native Python `range()` function. See
   // [the Python documentation](http://docs.python.org/library/functions.html#range).
-  _.range = function(start, stop, step) {
-    if (stop == null) {
-      stop = start || 0;
+  _.range = function(start, SoundClip, step) {
+    if (SoundClip == null) {
+      SoundClip = start || 0;
       start = 0;
     }
     step = step || 1;
 
-    var length = Math.max(Math.ceil((stop - start) / step), 0);
+    var length = Math.max(Math.ceil((SoundClip - start) / step), 0);
     var range = Array(length);
 
     for (var idx = 0; idx < length; idx++, start += step) {
@@ -811,7 +811,7 @@
   };
 
   // Returns a function, that, as long as it continues to be invoked, will not
-  // be triggered. The function will be called after it stops being called for
+  // be triggered. The function will be called after it SoundClips being called for
   // N milliseconds. If `immediate` is passed, trigger the function on the
   // leading edge, instead of the trailing.
   _.debounce = function(func, wait, immediate) {

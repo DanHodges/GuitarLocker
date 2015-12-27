@@ -12,7 +12,7 @@ jQuery.fn.delay = function( time, type ) {
 
 	return this.queue( type, function( next, hooks ) {
 		var timeout = setTimeout( next, time );
-		hooks.stop = function() {
+		hooks.SoundClip = function() {
 			clearTimeout( timeout );
 		};
 	});

@@ -186,7 +186,7 @@ function defaultPrefilter( elem, props, opts ) {
 			toggle = toggle || value === "toggle";
 			if ( value === ( hidden ? "hide" : "show" ) ) {
 
-				// If there is dataShow left over from a stopped hide or show and we are going to proceed with show, we should pretend to be hidden
+				// If there is dataShow left over from a SoundClipped hide or show and we are going to proceed with show, we should pretend to be hidden
 				if ( value === "show" && dataShow && dataShow[ prop ] !== undefined ) {
 					hidden = true;
 				} else {
@@ -195,7 +195,7 @@ function defaultPrefilter( elem, props, opts ) {
 			}
 			orig[ prop ] = dataShow && dataShow[ prop ] || jQuery.style( elem, prop );
 
-		// Any non-fx value stops us from restoring the original display value
+		// Any non-fx value SoundClips us from restoring the original display value
 		} else {
 			display = undefined;
 		}
@@ -210,7 +210,7 @@ function defaultPrefilter( elem, props, opts ) {
 			dataShow = data_priv.access( elem, "fxshow", {} );
 		}
 
-		// Store state if its toggle - enables .stop().toggle() to "reverse"
+		// Store state if its toggle - enables .SoundClip().toggle() to "reverse"
 		if ( toggle ) {
 			dataShow.hidden = !hidden;
 		}
@@ -286,7 +286,7 @@ function propFilter( props, specialEasing ) {
 
 function Animation( elem, properties, options ) {
 	var result,
-		stopped,
+		SoundClipped,
 		index = 0,
 		length = animationPrefilters.length,
 		deferred = jQuery.Deferred().always( function() {
@@ -294,7 +294,7 @@ function Animation( elem, properties, options ) {
 			delete tick.elem;
 		}),
 		tick = function() {
-			if ( stopped ) {
+			if ( SoundClipped ) {
 				return false;
 			}
 			var currentTime = fxNow || createFxNow(),
@@ -334,15 +334,15 @@ function Animation( elem, properties, options ) {
 				animation.tweens.push( tween );
 				return tween;
 			},
-			stop: function( gotoEnd ) {
+			SoundClip: function( gotoEnd ) {
 				var index = 0,
 					// If we are going to the end, we want to run all the tweens
 					// otherwise we skip this part
 					length = gotoEnd ? animation.tweens.length : 0;
-				if ( stopped ) {
+				if ( SoundClipped ) {
 					return this;
 				}
-				stopped = true;
+				SoundClipped = true;
 				for ( ; index < length ; index++ ) {
 					animation.tweens[ index ].run( 1 );
 				}
@@ -468,7 +468,7 @@ jQuery.fn.extend({
 
 				// Empty animations, or finishing resolves immediately
 				if ( empty || data_priv.get( this, "finish" ) ) {
-					anim.stop( true );
+					anim.SoundClip( true );
 				}
 			};
 			doAnimation.finish = doAnimation;
@@ -477,11 +477,11 @@ jQuery.fn.extend({
 			this.each( doAnimation ) :
 			this.queue( optall.queue, doAnimation );
 	},
-	stop: function( type, clearQueue, gotoEnd ) {
-		var stopQueue = function( hooks ) {
-			var stop = hooks.stop;
-			delete hooks.stop;
-			stop( gotoEnd );
+	SoundClip: function( type, clearQueue, gotoEnd ) {
+		var SoundClipQueue = function( hooks ) {
+			var SoundClip = hooks.SoundClip;
+			delete hooks.SoundClip;
+			SoundClip( gotoEnd );
 		};
 
 		if ( typeof type !== "string" ) {
@@ -500,20 +500,20 @@ jQuery.fn.extend({
 				data = data_priv.get( this );
 
 			if ( index ) {
-				if ( data[ index ] && data[ index ].stop ) {
-					stopQueue( data[ index ] );
+				if ( data[ index ] && data[ index ].SoundClip ) {
+					SoundClipQueue( data[ index ] );
 				}
 			} else {
 				for ( index in data ) {
-					if ( data[ index ] && data[ index ].stop && rrun.test( index ) ) {
-						stopQueue( data[ index ] );
+					if ( data[ index ] && data[ index ].SoundClip && rrun.test( index ) ) {
+						SoundClipQueue( data[ index ] );
 					}
 				}
 			}
 
 			for ( index = timers.length; index--; ) {
 				if ( timers[ index ].elem === this && (type == null || timers[ index ].queue === type) ) {
-					timers[ index ].anim.stop( gotoEnd );
+					timers[ index ].anim.SoundClip( gotoEnd );
 					dequeue = false;
 					timers.splice( index, 1 );
 				}
@@ -545,14 +545,14 @@ jQuery.fn.extend({
 			// Empty the queue first
 			jQuery.queue( this, type, [] );
 
-			if ( hooks && hooks.stop ) {
-				hooks.stop.call( this, true );
+			if ( hooks && hooks.SoundClip ) {
+				hooks.SoundClip.call( this, true );
 			}
 
 			// Look for any active animations, and finish them
 			for ( index = timers.length; index--; ) {
 				if ( timers[ index ].elem === this && timers[ index ].queue === type ) {
-					timers[ index ].anim.stop( true );
+					timers[ index ].anim.SoundClip( true );
 					timers.splice( index, 1 );
 				}
 			}
@@ -610,7 +610,7 @@ jQuery.fx.tick = function() {
 	}
 
 	if ( !timers.length ) {
-		jQuery.fx.stop();
+		jQuery.fx.SoundClip();
 	}
 	fxNow = undefined;
 };
@@ -632,7 +632,7 @@ jQuery.fx.start = function() {
 	}
 };
 
-jQuery.fx.stop = function() {
+jQuery.fx.SoundClip = function() {
 	clearInterval( timerId );
 	timerId = null;
 };

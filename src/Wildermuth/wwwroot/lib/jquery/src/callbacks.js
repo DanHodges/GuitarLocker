@@ -34,7 +34,7 @@ function createOptions( options ) {
  *
  *	unique:			will ensure a callback can only be added once (no duplicate in the list)
  *
- *	stopOnFalse:	interrupt callings when a callback returns false
+ *	SoundClipOnFalse:	interrupt callings when a callback returns false
  *
  */
 jQuery.Callbacks = function( options ) {
@@ -70,7 +70,7 @@ jQuery.Callbacks = function( options ) {
 			firingLength = list.length;
 			firing = true;
 			for ( ; list && firingIndex < firingLength; firingIndex++ ) {
-				if ( list[ firingIndex ].apply( data[ 0 ], data[ 1 ] ) === false && options.stopOnFalse ) {
+				if ( list[ firingIndex ].apply( data[ 0 ], data[ 1 ] ) === false && options.SoundClipOnFalse ) {
 					memory = false; // To prevent further calls using add
 					break;
 				}

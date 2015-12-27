@@ -3,11 +3,11 @@ using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Infrastructure;
 using Microsoft.Data.Entity.Metadata;
 using Microsoft.Data.Entity.Migrations;
-using Wildermuth.Models;
+using GuitarLocker.Models;
 
-namespace Wildermuth.Migrations
+namespace GuitarLocker.Migrations
 {
-    [DbContext(typeof(WorldContext))]
+    [DbContext(typeof(GuitarLockerContext))]
     [Migration("20151220010549_IdentityEntities")]
     partial class IdentityEntities
     {
@@ -99,7 +99,7 @@ namespace Wildermuth.Migrations
                     b.HasAnnotation("Relational:TableName", "AspNetUserRoles");
                 });
 
-            modelBuilder.Entity("Wildermuth.Models.Stop", b =>
+            modelBuilder.Entity("GuitarLocker.Models.SoundClip", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -114,12 +114,12 @@ namespace Wildermuth.Migrations
 
                     b.Property<int>("Order");
 
-                    b.Property<int?>("TripId");
+                    b.Property<int?>("InstrumentId");
 
                     b.HasKey("Id");
                 });
 
-            modelBuilder.Entity("Wildermuth.Models.Trip", b =>
+            modelBuilder.Entity("GuitarLocker.Models.Instrument", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -133,7 +133,7 @@ namespace Wildermuth.Migrations
                     b.HasKey("Id");
                 });
 
-            modelBuilder.Entity("Wildermuth.Models.WorldUser", b =>
+            modelBuilder.Entity("GuitarLocker.Models.GuitarLockerUser", b =>
                 {
                     b.Property<string>("Id");
 
@@ -147,7 +147,7 @@ namespace Wildermuth.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<DateTime>("FirstTrip");
+                    b.Property<DateTime>("FirstInstrument");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -192,14 +192,14 @@ namespace Wildermuth.Migrations
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Wildermuth.Models.WorldUser")
+                    b.HasOne("GuitarLocker.Models.GuitarLockerUser")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Wildermuth.Models.WorldUser")
+                    b.HasOne("GuitarLocker.Models.GuitarLockerUser")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
@@ -210,16 +210,16 @@ namespace Wildermuth.Migrations
                         .WithMany()
                         .HasForeignKey("RoleId");
 
-                    b.HasOne("Wildermuth.Models.WorldUser")
+                    b.HasOne("GuitarLocker.Models.GuitarLockerUser")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("Wildermuth.Models.Stop", b =>
+            modelBuilder.Entity("GuitarLocker.Models.SoundClip", b =>
                 {
-                    b.HasOne("Wildermuth.Models.Trip")
+                    b.HasOne("GuitarLocker.Models.Instrument")
                         .WithMany()
-                        .HasForeignKey("TripId");
+                        .HasForeignKey("InstrumentId");
                 });
         }
     }

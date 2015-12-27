@@ -5,20 +5,20 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
 
-namespace Wildermuth.Models
+namespace GuitarLocker.Models
 {
-    public class WorldContext : IdentityDbContext<WorldUser>
+    public class GuitarLockerContext : IdentityDbContext<GuitarLockerUser>
     {
-        public WorldContext()
+        public GuitarLockerContext()
         {
             Database.EnsureCreated();
         }
-        public DbSet<Trip> Trips { get; set; }
-        public DbSet<Stop> Stops { get; set; }
+        public DbSet<Instrument> Instruments { get; set; }
+        public DbSet<SoundClip> SoundClips { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connString = Startup.Configuration["Data:WorldContextConnection"];
+            var connString = Startup.Configuration["Data:GuitarLockerContextConnection"];
             optionsBuilder.UseSqlServer(connString);
             base.OnConfiguring(optionsBuilder); 
         }

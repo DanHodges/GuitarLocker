@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Data.Entity.Migrations;
 using Microsoft.Data.Entity.Metadata;
 
-namespace Wildermuth.Migrations
+namespace GuitarLocker.Migrations
 {
     public partial class IdentityEntities : Migration
     {
@@ -31,7 +31,7 @@ namespace Wildermuth.Migrations
                     ConcurrencyStamp = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     EmailConfirmed = table.Column<bool>(nullable: false),
-                    FirstTrip = table.Column<DateTime>(nullable: false),
+                    FirstInstrument = table.Column<DateTime>(nullable: false),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     NormalizedEmail = table.Column<string>(nullable: true),
@@ -45,7 +45,7 @@ namespace Wildermuth.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WorldUser", x => x.Id);
+                    table.PrimaryKey("PK_GuitarLockerUser", x => x.Id);
                 });
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
@@ -81,7 +81,7 @@ namespace Wildermuth.Migrations
                 {
                     table.PrimaryKey("PK_IdentityUserClaim<string>", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_IdentityUserClaim<string>_WorldUser_UserId",
+                        name: "FK_IdentityUserClaim<string>_GuitarLockerUser_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -100,7 +100,7 @@ namespace Wildermuth.Migrations
                 {
                     table.PrimaryKey("PK_IdentityUserLogin<string>", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
-                        name: "FK_IdentityUserLogin<string>_WorldUser_UserId",
+                        name: "FK_IdentityUserLogin<string>_GuitarLockerUser_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -123,7 +123,7 @@ namespace Wildermuth.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_IdentityUserRole<string>_WorldUser_UserId",
+                        name: "FK_IdentityUserRole<string>_GuitarLockerUser_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",

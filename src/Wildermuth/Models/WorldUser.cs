@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace Wildermuth.Models
+namespace GuitarLocker.Models
 {
-    public class WorldUser : IdentityUser
+    public class GuitarLockerUser : IdentityUser
     {
-        public DateTime FirstTrip { get; set; }
+        public DateTime FirstInstrument { get; set; }
     }
 }

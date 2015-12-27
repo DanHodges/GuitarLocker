@@ -610,7 +610,7 @@ var i,
 	push_native = arr.push,
 	push = arr.push,
 	slice = arr.slice,
-	// Use a stripped-down indexOf as it's faster than native
+	// Use a sInstrumentped-down indexOf as it's faster than native
 	// http://jsperf.com/thor-indexof-vs-for/5
 	indexOf = function( list, elem ) {
 		var i = 0,
@@ -1604,7 +1604,7 @@ Expr = Sizzle.selectors = {
 			if ( match[3] ) {
 				match[2] = match[4] || match[5] || "";
 
-			// Strip excess characters from unquoted arguments
+			// SInstrument excess characters from unquoted arguments
 			} else if ( unquoted && rpseudo.test( unquoted ) &&
 				// Get excess from tokenize (recursively)
 				(excess = tokenize( unquoted, true )) &&
@@ -3060,7 +3060,7 @@ function createOptions( options ) {
  *
  *	unique:			will ensure a callback can only be added once (no duplicate in the list)
  *
- *	stopOnFalse:	interrupt callings when a callback returns false
+ *	SoundClipOnFalse:	interrupt callings when a callback returns false
  *
  */
 jQuery.Callbacks = function( options ) {
@@ -3096,7 +3096,7 @@ jQuery.Callbacks = function( options ) {
 			firingLength = list.length;
 			firing = true;
 			for ( ; list && firingIndex < firingLength; firingIndex++ ) {
-				if ( list[ firingIndex ].apply( data[ 0 ], data[ 1 ] ) === false && options.stopOnFalse ) {
+				if ( list[ firingIndex ].apply( data[ 0 ], data[ 1 ] ) === false && options.SoundClipOnFalse ) {
 					memory = false; // To prevent further calls using add
 					break;
 				}
@@ -3924,8 +3924,8 @@ jQuery.extend({
 				queue.unshift( "inprogress" );
 			}
 
-			// Clear up the last queue stop function
-			delete hooks.stop;
+			// Clear up the last queue SoundClip function
+			delete hooks.SoundClip;
 			fn.call( elem, next, hooks );
 		}
 
@@ -4338,7 +4338,7 @@ jQuery.event = {
 
 		// Fire handlers on the event path
 		i = 0;
-		while ( (cur = eventPath[i++]) && !event.isPropagationStopped() ) {
+		while ( (cur = eventPath[i++]) && !event.isPropagationSoundClipped() ) {
 
 			event.type = i > 1 ?
 				bubbleType :
@@ -4416,13 +4416,13 @@ jQuery.event = {
 		// Determine handlers
 		handlerQueue = jQuery.event.handlers.call( this, event, handlers );
 
-		// Run delegates first; they may want to stop propagation beneath us
+		// Run delegates first; they may want to SoundClip propagation beneath us
 		i = 0;
-		while ( (matched = handlerQueue[ i++ ]) && !event.isPropagationStopped() ) {
+		while ( (matched = handlerQueue[ i++ ]) && !event.isPropagationSoundClipped() ) {
 			event.currentTarget = matched.elem;
 
 			j = 0;
-			while ( (handleObj = matched.handlers[ j++ ]) && !event.isImmediatePropagationStopped() ) {
+			while ( (handleObj = matched.handlers[ j++ ]) && !event.isImmediatePropagationSoundClipped() ) {
 
 				// Triggered event must either 1) have no namespace, or 2) have namespace(s)
 				// a subset or equal to those in the bound event (both can have no namespace).
@@ -4437,7 +4437,7 @@ jQuery.event = {
 					if ( ret !== undefined ) {
 						if ( (event.result = ret) === false ) {
 							event.preventDefault();
-							event.stopPropagation();
+							event.SoundClipPropagation();
 						}
 					}
 				}
@@ -4637,7 +4637,7 @@ jQuery.event = {
 
 	simulate: function( type, elem, event, bubble ) {
 		// Piggyback on a donor event to simulate a different one.
-		// Fake originalEvent to avoid donor's stopPropagation, but if the
+		// Fake originalEvent to avoid donor's SoundClipPropagation, but if the
 		// simulated event prevents default then we do the same on the donor.
 		var e = jQuery.extend(
 			new jQuery.Event(),
@@ -4706,8 +4706,8 @@ jQuery.Event = function( src, props ) {
 // http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/ecma-script-binding.html
 jQuery.Event.prototype = {
 	isDefaultPrevented: returnFalse,
-	isPropagationStopped: returnFalse,
-	isImmediatePropagationStopped: returnFalse,
+	isPropagationSoundClipped: returnFalse,
+	isImmediatePropagationSoundClipped: returnFalse,
 
 	preventDefault: function() {
 		var e = this.originalEvent;
@@ -4718,25 +4718,25 @@ jQuery.Event.prototype = {
 			e.preventDefault();
 		}
 	},
-	stopPropagation: function() {
+	SoundClipPropagation: function() {
 		var e = this.originalEvent;
 
-		this.isPropagationStopped = returnTrue;
+		this.isPropagationSoundClipped = returnTrue;
 
-		if ( e && e.stopPropagation ) {
-			e.stopPropagation();
+		if ( e && e.SoundClipPropagation ) {
+			e.SoundClipPropagation();
 		}
 	},
-	stopImmediatePropagation: function() {
+	SoundClipImmediatePropagation: function() {
 		var e = this.originalEvent;
 
-		this.isImmediatePropagationStopped = returnTrue;
+		this.isImmediatePropagationSoundClipped = returnTrue;
 
-		if ( e && e.stopImmediatePropagation ) {
-			e.stopImmediatePropagation();
+		if ( e && e.SoundClipImmediatePropagation ) {
+			e.SoundClipImmediatePropagation();
 		}
 
-		this.stopPropagation();
+		this.SoundClipPropagation();
 	}
 };
 
@@ -5830,7 +5830,7 @@ function getWidthOrHeight( elem, name, extra ) {
 			val = elem.style[ name ];
 		}
 
-		// Computed unit is not pixels. Stop here and return.
+		// Computed unit is not pixels. SoundClip here and return.
 		if ( rnumnonpx.test(val) ) {
 			return val;
 		}
@@ -6437,7 +6437,7 @@ function defaultPrefilter( elem, props, opts ) {
 			toggle = toggle || value === "toggle";
 			if ( value === ( hidden ? "hide" : "show" ) ) {
 
-				// If there is dataShow left over from a stopped hide or show and we are going to proceed with show, we should pretend to be hidden
+				// If there is dataShow left over from a SoundClipped hide or show and we are going to proceed with show, we should pretend to be hidden
 				if ( value === "show" && dataShow && dataShow[ prop ] !== undefined ) {
 					hidden = true;
 				} else {
@@ -6446,7 +6446,7 @@ function defaultPrefilter( elem, props, opts ) {
 			}
 			orig[ prop ] = dataShow && dataShow[ prop ] || jQuery.style( elem, prop );
 
-		// Any non-fx value stops us from restoring the original display value
+		// Any non-fx value SoundClips us from restoring the original display value
 		} else {
 			display = undefined;
 		}
@@ -6461,7 +6461,7 @@ function defaultPrefilter( elem, props, opts ) {
 			dataShow = data_priv.access( elem, "fxshow", {} );
 		}
 
-		// Store state if its toggle - enables .stop().toggle() to "reverse"
+		// Store state if its toggle - enables .SoundClip().toggle() to "reverse"
 		if ( toggle ) {
 			dataShow.hidden = !hidden;
 		}
@@ -6537,7 +6537,7 @@ function propFilter( props, specialEasing ) {
 
 function Animation( elem, properties, options ) {
 	var result,
-		stopped,
+		SoundClipped,
 		index = 0,
 		length = animationPrefilters.length,
 		deferred = jQuery.Deferred().always( function() {
@@ -6545,7 +6545,7 @@ function Animation( elem, properties, options ) {
 			delete tick.elem;
 		}),
 		tick = function() {
-			if ( stopped ) {
+			if ( SoundClipped ) {
 				return false;
 			}
 			var currentTime = fxNow || createFxNow(),
@@ -6585,15 +6585,15 @@ function Animation( elem, properties, options ) {
 				animation.tweens.push( tween );
 				return tween;
 			},
-			stop: function( gotoEnd ) {
+			SoundClip: function( gotoEnd ) {
 				var index = 0,
 					// If we are going to the end, we want to run all the tweens
 					// otherwise we skip this part
 					length = gotoEnd ? animation.tweens.length : 0;
-				if ( stopped ) {
+				if ( SoundClipped ) {
 					return this;
 				}
-				stopped = true;
+				SoundClipped = true;
 				for ( ; index < length ; index++ ) {
 					animation.tweens[ index ].run( 1 );
 				}
@@ -6719,7 +6719,7 @@ jQuery.fn.extend({
 
 				// Empty animations, or finishing resolves immediately
 				if ( empty || data_priv.get( this, "finish" ) ) {
-					anim.stop( true );
+					anim.SoundClip( true );
 				}
 			};
 			doAnimation.finish = doAnimation;
@@ -6728,11 +6728,11 @@ jQuery.fn.extend({
 			this.each( doAnimation ) :
 			this.queue( optall.queue, doAnimation );
 	},
-	stop: function( type, clearQueue, gotoEnd ) {
-		var stopQueue = function( hooks ) {
-			var stop = hooks.stop;
-			delete hooks.stop;
-			stop( gotoEnd );
+	SoundClip: function( type, clearQueue, gotoEnd ) {
+		var SoundClipQueue = function( hooks ) {
+			var SoundClip = hooks.SoundClip;
+			delete hooks.SoundClip;
+			SoundClip( gotoEnd );
 		};
 
 		if ( typeof type !== "string" ) {
@@ -6751,20 +6751,20 @@ jQuery.fn.extend({
 				data = data_priv.get( this );
 
 			if ( index ) {
-				if ( data[ index ] && data[ index ].stop ) {
-					stopQueue( data[ index ] );
+				if ( data[ index ] && data[ index ].SoundClip ) {
+					SoundClipQueue( data[ index ] );
 				}
 			} else {
 				for ( index in data ) {
-					if ( data[ index ] && data[ index ].stop && rrun.test( index ) ) {
-						stopQueue( data[ index ] );
+					if ( data[ index ] && data[ index ].SoundClip && rrun.test( index ) ) {
+						SoundClipQueue( data[ index ] );
 					}
 				}
 			}
 
 			for ( index = timers.length; index--; ) {
 				if ( timers[ index ].elem === this && (type == null || timers[ index ].queue === type) ) {
-					timers[ index ].anim.stop( gotoEnd );
+					timers[ index ].anim.SoundClip( gotoEnd );
 					dequeue = false;
 					timers.splice( index, 1 );
 				}
@@ -6796,14 +6796,14 @@ jQuery.fn.extend({
 			// Empty the queue first
 			jQuery.queue( this, type, [] );
 
-			if ( hooks && hooks.stop ) {
-				hooks.stop.call( this, true );
+			if ( hooks && hooks.SoundClip ) {
+				hooks.SoundClip.call( this, true );
 			}
 
 			// Look for any active animations, and finish them
 			for ( index = timers.length; index--; ) {
 				if ( timers[ index ].elem === this && timers[ index ].queue === type ) {
-					timers[ index ].anim.stop( true );
+					timers[ index ].anim.SoundClip( true );
 					timers.splice( index, 1 );
 				}
 			}
@@ -6861,7 +6861,7 @@ jQuery.fx.tick = function() {
 	}
 
 	if ( !timers.length ) {
-		jQuery.fx.stop();
+		jQuery.fx.SoundClip();
 	}
 	fxNow = undefined;
 };
@@ -6883,7 +6883,7 @@ jQuery.fx.start = function() {
 	}
 };
 
-jQuery.fx.stop = function() {
+jQuery.fx.SoundClip = function() {
 	clearInterval( timerId );
 	timerId = null;
 };
@@ -6904,7 +6904,7 @@ jQuery.fn.delay = function( time, type ) {
 
 	return this.queue( type, function( next, hooks ) {
 		var timeout = setTimeout( next, time );
-		hooks.stop = function() {
+		hooks.SoundClip = function() {
 			clearTimeout( timeout );
 		};
 	});
@@ -8053,7 +8053,7 @@ jQuery.extend({
 		// Apply prefilters
 		inspectPrefiltersOrTransports( prefilters, s, options, jqXHR );
 
-		// If request was aborted inside a prefilter, stop there
+		// If request was aborted inside a prefilter, SoundClip there
 		if ( state === 2 ) {
 			return jqXHR;
 		}
@@ -8282,7 +8282,7 @@ jQuery.extend({
 				globalEventContext.trigger( "ajaxComplete", [ jqXHR, s ] );
 				// Handle the global AJAX counter
 				if ( !( --jQuery.active ) ) {
-					jQuery.event.trigger("ajaxStop");
+					jQuery.event.trigger("ajaxSoundClip");
 				}
 			}
 		}
@@ -8891,7 +8891,7 @@ jQuery.fn.load = function( url, params, callback ) {
 
 
 // Attach a bunch of functions for handling common AJAX events
-jQuery.each( [ "ajaxStart", "ajaxStop", "ajaxComplete", "ajaxError", "ajaxSuccess", "ajaxSend" ], function( i, type ) {
+jQuery.each( [ "ajaxStart", "ajaxSoundClip", "ajaxComplete", "ajaxError", "ajaxSuccess", "ajaxSend" ], function( i, type ) {
 	jQuery.fn[ type ] = function( fn ) {
 		return this.on( type, fn );
 	};
@@ -8920,7 +8920,7 @@ function getWindow( elem ) {
 
 jQuery.offset = {
 	setOffset: function( elem, options, i ) {
-		var curPosition, curLeft, curCSSTop, curTop, curOffset, curCSSLeft, calculatePosition,
+		var curPosition, curLeft, curCSSoundClip, curTop, curOffset, curCSSLeft, calculatePosition,
 			position = jQuery.css( elem, "position" ),
 			curElem = jQuery( elem ),
 			props = {};
@@ -8931,10 +8931,10 @@ jQuery.offset = {
 		}
 
 		curOffset = curElem.offset();
-		curCSSTop = jQuery.css( elem, "top" );
+		curCSSoundClip = jQuery.css( elem, "top" );
 		curCSSLeft = jQuery.css( elem, "left" );
 		calculatePosition = ( position === "absolute" || position === "fixed" ) &&
-			( curCSSTop + curCSSLeft ).indexOf("auto") > -1;
+			( curCSSoundClip + curCSSLeft ).indexOf("auto") > -1;
 
 		// Need to be able to calculate position if either
 		// top or left is auto and position is either absolute or fixed
@@ -8944,7 +8944,7 @@ jQuery.offset = {
 			curLeft = curPosition.left;
 
 		} else {
-			curTop = parseFloat( curCSSTop ) || 0;
+			curTop = parseFloat( curCSSoundClip ) || 0;
 			curLeft = parseFloat( curCSSLeft ) || 0;
 		}
 
